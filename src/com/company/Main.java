@@ -38,6 +38,9 @@ public class Main {
 
     }
 
+    private static void showHelp () {
+        System.out.println("One day here will be a great manual. Eventually");
+    }
 
 
     private static void listRecords() {
@@ -76,14 +79,27 @@ public class Main {
         p.setPhone(phone);
 
         records.add(p);
+
+        savePerson();
     }
 
-    private static void showHelp() {
-        System.out.println("One day here will be a great manual. Eventually");
+    private static void savePerson() {
+        File file = new File("records.txt");
+        try (PrintWriter out = new PrintWriter(file)) {
+            for (Person p : records) {
+                out.print(p.getId());
+                out.print(" ");
+                out.print(p.getName());
+                out.print(" ");
+                out.print(p.getSurname());
+                out.print(" ");
+                out.print(p.getPhone());
+                out.println();
+            }
+        } catch (IOException e) {
+            System.out.println("Error");
+        }
     }
-
-
 }
-
 
 

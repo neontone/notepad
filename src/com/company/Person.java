@@ -1,12 +1,15 @@
 package com.company;
 
 public class Person {
+   private static int counter = 0;
    private int id;
    private String name;
    private String surname;
    private String phone;
 
-    public static void add(Person p) {
+    public Person() {
+        counter++;
+        id = counter;
     }
 
     public String getName() {
@@ -21,9 +24,6 @@ public class Person {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getSurname() {
         return surname;
