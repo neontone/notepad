@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    static Scanner scan = new Scanner(System.in);
-    static ArrayList<Person> records = new ArrayList<>();
+    static final Scanner scan = new Scanner(System.in);
+    static ArrayList<Record> records = new ArrayList<>();
+    static ArrayList<Record> listrecords = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -30,6 +31,9 @@ public class Main {
                 case "list":
                     listRecords();
                     break;
+                case "notes":
+                    listNotes();
+                    break;
                 default:
                     System.out.println("Wrong command");
                     break;
@@ -38,18 +42,25 @@ public class Main {
 
     }
 
+    private static void listNotes() {
+        for (Record p : listrecords) {
+            System.out.println(p);
+        }
+    }
+
     private static void showHelp () {
         System.out.println("One day here will be a great manual. Eventually");
     }
 
 
     private static void listRecords() {
-        for (Person p : records) {
-            System.out.printf("%d %s %s %s\n",
-                    p.getId(),
-                    p.getName(),
-                    p.getSurname(),
-                    p.getPhone());
+        for (Record p : records) {
+  //         System.out.printf("%d %s %s %s\n",
+  //                  p.getId(),
+  //                  p.getName(),
+  //                  p.getSurname(),
+  //                  p.getPhone());
+            System.out.println(p);
         }
     }
 
@@ -60,46 +71,27 @@ public class Main {
             case "person":
                 createPerson();
                 break;
+            case "note":
+                createNote();
+                break;
             default:
                 System.out.println("Error. Unknown record type");
         }
     }
 
+    private static void createNote() {
+        Note p = new Note();
+        p.askNote();
+        listrecords.add(p);
+    }
+
     private static void createPerson() {
-        System.out.println("Name> ");
-        String name = scan.next();
-        System.out.println("Surname> ");
-        String surname = scan.next();
-        System.out.println("Phone> ");
-        String phone = scan.next();
-
         Person p = new Person();
-        p.setName(name);
-        p.setSurname(surname);
-        p.setPhone(phone);
-
+        p.askInfo();
         records.add(p);
 
-        savePerson();
     }
 
-    private static void savePerson() {
-        File file = new File("records.txt");
-        try (PrintWriter out = new PrintWriter(file)) {
-            for (Person p : records) {
-                out.print(p.getId());
-                out.print(" ");
-                out.print(p.getName());
-                out.print(" ");
-                out.print(p.getSurname());
-                out.print(" ");
-                out.print(p.getPhone());
-                out.println();
-            }
-        } catch (IOException e) {
-            System.out.println("Error");
-        }
-    }
 }
 
 
