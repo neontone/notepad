@@ -9,11 +9,9 @@ import java.util.Scanner;
 public class Main {
     static final Scanner scan = new Scanner(System.in);
     static ArrayList<Record> records = new ArrayList<>();
-    static ArrayList<Record> listrecords = new ArrayList<>();
-    static ArrayList<Record> alarmlist = new ArrayList<>();
-
 
     public static void main(String[] args) {
+        scan.useDelimiter("\n"); // пробелы не учитываются, только перевод строки
         System.out.println("Enter a command");
         for (; ; ) {
             System.out.print("> ");
@@ -32,11 +30,9 @@ public class Main {
                 case "list":
                     listRecords();
                     break;
-                case "notes":
-                    listNotes();
+                case "search":
+                    searchRecord();
                     break;
-                case "alarms":
-                    listAlarms();
                 default:
                     System.out.println("Wrong command");
                     break;
@@ -45,21 +41,16 @@ public class Main {
 
     }
 
-    private static void listAlarms() {
-        for (Record p : alarmlist) {
-            System.out.println(p);
-        }
-    }
+    private boolean searchRecord() {
+        System.out.println("What do you want to find?");
+        String str = scan.next();
+
+        if ()
+            System.out.println("");
+        else
+            System.out.println("Nothing to show");
 
 
-    private static void listNotes() {
-        for (Record p : listrecords) {
-            System.out.println(p);
-        }
-    }
-
-    private static void showHelp () {
-        System.out.println("One day here will be a great manual. Eventually");
     }
 
 
@@ -69,41 +60,31 @@ public class Main {
         }
     }
 
+    private static void showHelp () {
+        System.out.println("One day here will be a great manual. Eventually");
+    }
+
     private static void createRecord() {
         System.out.print("type> ");
         String type = scan.next();
         switch (type) {
             case "person":
-                createPerson();
+                createRecord(new Person());
                 break;
             case "note":
-                createNote();
+                createRecord(new Note());
                 break;
             case "alarm":
-                createAlarm();
+                createRecord(new Alarm());
                 break;
             default:
                 System.out.println("Error. Unknown record type");
         }
     }
 
-    private static void createAlarm() {
-        Alarm p = new Alarm();
-        p.askTime();
-        alarmlist.add(p);
-    }
-
-    private static void createNote() {
-        Note p = new Note();
-        p.askNote();
-        listrecords.add(p);
-    }
-
-    private static void createPerson() {
-        Person p = new Person();
-        p.askInfo();
-        records.add(p);
-
+    private static void createRecord(Record r) {
+        r.askInfo();
+        records.add(r);
     }
 
 }

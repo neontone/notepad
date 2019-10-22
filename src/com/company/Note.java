@@ -3,10 +3,16 @@ package com.company;
 public class Note extends Record{
     private String note;
 
-    public void askNote() {
+    @Override
+    public void askInfo() {
         System.out.println("Note> ");
         note = Main.scan.next();
     }
+
+    public boolean contains(String str) {
+        return note.contains(str);
+    }
+
     public String getNote() {return note;}
 
 

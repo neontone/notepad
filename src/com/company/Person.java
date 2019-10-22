@@ -7,7 +7,7 @@ public class Person extends Record{
    private String email;
 
 
-
+    @Override
     public void askInfo() {
         System.out.println("Name> ");
         name = Main.scan.next();
@@ -17,6 +17,11 @@ public class Person extends Record{
         phone = Main.scan.next();
         System.out.println("Email>");
         email = Main.scan.next();
+    }
+
+    @Override
+    public boolean contains(String str) {
+        return name.contains(str) || surname.contains(str) || phone.contains(str) || email.contains(str);
     }
 
     public String getName() {

@@ -3,10 +3,15 @@ package com.company;
 public class Alarm extends Note {
     private String time;
 
-    public void askTime() {
+    @Override
+    public void askInfo() {
         System.out.println("Time> ");
         time = Main.scan.next();
-        askNote();
+        super.askInfo();
+    }
+
+    public boolean contains(String str) {
+        return time.contains(str) || super.contains(str);
     }
 
     public String getTime() {
