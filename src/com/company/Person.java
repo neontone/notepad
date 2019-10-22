@@ -27,7 +27,6 @@ public class Person extends Record{
         this.name = name;
     }
 
-
     public String getSurname() {
         return surname;
     }

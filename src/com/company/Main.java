@@ -10,6 +10,7 @@ public class Main {
     static final Scanner scan = new Scanner(System.in);
     static ArrayList<Record> records = new ArrayList<>();
     static ArrayList<Record> listrecords = new ArrayList<>();
+    static ArrayList<Record> alarmlist = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -34,6 +35,8 @@ public class Main {
                 case "notes":
                     listNotes();
                     break;
+                case "alarms":
+                    listAlarms();
                 default:
                     System.out.println("Wrong command");
                     break;
@@ -41,6 +44,13 @@ public class Main {
         }
 
     }
+
+    private static void listAlarms() {
+        for (Record p : alarmlist) {
+            System.out.println(p);
+        }
+    }
+
 
     private static void listNotes() {
         for (Record p : listrecords) {
@@ -55,11 +65,6 @@ public class Main {
 
     private static void listRecords() {
         for (Record p : records) {
-  //         System.out.printf("%d %s %s %s\n",
-  //                  p.getId(),
-  //                  p.getName(),
-  //                  p.getSurname(),
-  //                  p.getPhone());
             System.out.println(p);
         }
     }
@@ -74,9 +79,18 @@ public class Main {
             case "note":
                 createNote();
                 break;
+            case "alarm":
+                createAlarm();
+                break;
             default:
                 System.out.println("Error. Unknown record type");
         }
+    }
+
+    private static void createAlarm() {
+        Alarm p = new Alarm();
+        p.askTime();
+        alarmlist.add(p);
     }
 
     private static void createNote() {
